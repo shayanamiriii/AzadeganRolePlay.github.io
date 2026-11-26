@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>شهر آزادگان | سرور رول‌پلی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000000;--card:#0e0e14;--line:rgba(255,255,255,.14);--blue:#9d5cff;--cyan:#c98bff;--ice:#f2f2f8;--mut:#9a9ab2;--gold:#ffc83d;--grad:linear-gradient(135deg,#9d5cff,#ff4fd8);--rgb:linear-gradient(45deg,#ff4fd8,#9d5cff,#4fd8ff,#ffc83d,#ff4fd8)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:Vazirmatn,Tahoma,system-ui,sans-serif;color:var(--ice);line-height:1.8}
+/* ===== پس‌زمینه متحرک: شهر لوس سانتوس + تابلوی AZADEGAN CITY ===== */
+#citybg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:#000;pointer-events:none}
+#citybg .stars{position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 25px 35px,rgba(255,255,255,.9),transparent 60%),radial-gradient(1px 1px at 120px 90px,rgba(255,215,160,.85),transparent 60%),radial-gradient(1.4px 1.4px at 200px 160px,rgba(216,170,255,.9),transparent 60%),radial-gradient(1px 1px at 80px 190px,rgba(160,220,255,.85),transparent 60%),radial-gradient(1.2px 1.2px at 240px 60px,rgba(255,170,230,.85),transparent 60%);background-size:280px 280px;animation:twinkle 6s ease-in-out infinite}
+#citybg .neb{position:absolute;inset:-15%;background:radial-gradient(420px 420px at 15% 25%,rgba(157,92,255,.13),transparent 70%),radial-gradient(380px 380px at 85% 55%,rgba(255,79,216,.1),transparent 70%),radial-gradient(340px 340px at 55% 85%,rgba(79,216,255,.08),transparent 70%);animation:drift 22s ease-in-out infinite alternate}
+#citybg .moon{position:absolute;top:7%;left:10%;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 38% 35%,#ffffff,#dfe4ff 55%,rgba(180,190,255,.2) 72%,transparent 78%);box-shadow:0 0 70px rgba(190,200,255,.35)}
+#citybg .hills{position:absolute;bottom:5%;left:0;width:100%;height:42%}
+#citybg .sky{position:absolute;left:0;width:100%}
+#citybg .far{bottom:8%;height:30%;opacity:.9}
+#citybg .near{bottom:1%;height:38%}
+#citybg .fog{position:absolute;bottom:36%;width:100%;height:70px;background:linear-gradient(180deg,transparent,rgba(130,150,210,.06),transparent)}
+#citybg .beam{position:absolute;top:0;left:60%;width:190px;height:46%;clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(150,190,255,.16),rgba(150,190,255,.02) 85%);transform-origin:50% 0;animation:sweep 18s ease-in-out infinite alternate;opacity:.75}
+#citybg .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.12) 42%,rgba(0,0,0,.5) 75%,rgba(0,0,0,.9))}
+#citybg .road{position:absolute;bottom:0;width:100%;height:52px}
+#citybg .lane{position:absolute;bottom:26px;height:3px;width:100%;background:repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,244,214,.85) 34px 44px);filter:blur(.6px);animation:flowL 2.4s linear infinite;opacity:.85}
+#citybg .lane.r{bottom:12px;background:repeating-linear-gradient(90deg,transparent 0 42px,rgba(255,92,112,.85) 42px 52px);animation:flowR 3s linear infinite}
+#citybg .wd{animation:winflick 7s linear infinite}
+#citybg .bl{animation:blink 1.6s linear infinite}
+#citybg .lt{font-family:Vazirmatn,Tahoma,sans-serif;font-weight:900;font-size:56px;fill:#f7f7fb;animation:signflick 9s linear infinite}
+#citybg .palm{position:absolute;bottom:1%;width:64px;height:100px;opacity:.95;left:4%}
+#citybg .palm.p2{left:auto;right:5%;transform:scaleX(-1)}
+@keyframes twinkle{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes drift{to{transform:translate3d(3%,-4%,0) rotate(4deg)}}
+@keyframes winflick{0%,86%,100%{opacity:.9}90%,94%{opacity:.3}}
+@keyframes blink{0%,100%{opacity:.95}50%{opacity:.15}}
+@keyframes sweep{from{transform:rotate(-26deg)}to{transform:rotate(22deg)}}
+@keyframes flowL{from{background-position:0 0}to{background-position:-150px 0}}
+@keyframes flowR{from{background-position:0 0}to{background-position:150px 0}}
+@keyframes signflick{0%,85%,91%,100%{opacity:1}88%,90%{opacity:.1}}
+@keyframes rgbshift{0%{background-position:0% 50%}100%{background-position:150% 50%}}
+@keyframes rgbshift2{0%{background-position:0 0,0% 50%}100%{background-position:0 0,150% 50%}}
+@keyframes rgbshift3{0%{background-position:0 0,0 0,0% 50%}100%{background-position:0 0,0 0,150% 50%}}
+@keyframes pulseglow{0%,100%{box-shadow:0 0 22px rgba(157,92,255,.25)}50%{box-shadow:0 0 38px rgba(255,79,216,.38)}}
+@keyframes pulse{50%{opacity:.25}}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+::selection{background:#9d5cff;color:#fff}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#050505}
+::-webkit-scrollbar-thumb{background:linear-gradient(#9d5cff,#ff4fd8);border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem}
+section{padding:4.5rem 0}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;line-height:1.4;background:linear-gradient(90deg,#f2f2f8,#c98bff,#ff9de6,#8be9ff,#f2f2f8);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:rgbshift 8s linear infinite}
+.tag{display:inline-block;padding:.15rem .9rem;border:1px solid rgba(190,140,255,.45);border-radius:999px;color:#dfc2ff;font-size:.85rem;background:rgba(157,92,255,.08);box-shadow:0 0 16px rgba(157,92,255,.15)}
+.tag+h2{margin-top:.6rem}
+.sub{color:var(--mut)}
+.center{text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.5rem;border-radius:.8rem;border:1px solid var(--line);background:var(--card);font-weight:700;transition:.2s}
+.btn.p{background:linear-gradient(90deg,#9d5cff,#ff4fd8,#ffc83d,#4fd8ff,#9d5cff);background-size:300% 100%;border-color:transparent;color:#12051f;box-shadow:0 8px 28px rgba(157,92,255,.4);animation:rgbshift 3s linear infinite}
+.btn:hover{filter:brightness(1.15)}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
+header{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:1px;background:linear-gradient(90deg,#ff4fd8,#ffc83d,#4fd8ff,#9d5cff,#ff4fd8);background-size:300% 100%;animation:rgbshift 6s linear infinite}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:900;font-size:1.2rem}
+.logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#ff4fd8,#9d5cff,#ffc83d,#ff4fd8);background-size:300% 300%;display:grid;place-items:center;color:#12051f;font-style:normal;animation:rgbshift 4s linear infinite;box-shadow:0 0 14px rgba(157,92,255,.55)}
+nav{display:flex;gap:1.4rem;color:var(--mut)}
+nav a:hover{color:#ffd6f7}
+@media(max-width:900px){nav{display:none}}
+.hero{padding:6rem 0 4.5rem;text-align:center;background:radial-gradient(60% 70% at 50% 0,rgba(157,92,255,.25),transparent 70%)}
+.hero h1{font-size:clamp(3.2rem,10vw,7rem);font-weight:900;line-height:1.25;margin-top:1rem;background:linear-gradient(90deg,#ff4fd8,#ffc83d,#4fd8ff,#9d5cff,#ff4fd8);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:rgbshift 5s linear infinite;filter:drop-shadow(0 0 26px rgba(157,92,255,.5))}
+.hero p{max-width:36rem;margin:1rem auto 0;color:var(--mut);font-size:1.1rem}
+.hero .cta{margin-top:2rem}
+.stats{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2.5rem}
+.stats span{padding:.35rem 1.1rem;border:1px solid var(--line);border-radius:.8rem;background:rgba(14,14,20,.75)}
+.stats b{color:#fff;margin-inline-start:.5rem}
+.why{display:grid;gap:1rem;margin-top:2rem;grid-template-columns:1.2fr 1fr 1fr}
+.big{grid-row:span 2;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem;border:1px solid rgba(190,140,255,.4);border-radius:1.2rem;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.95)),radial-gradient(80% 60% at 70% 20%,rgba(255,79,216,.3),rgba(124,58,237,.18) 50%,#0e0e1c);animation:pulseglow 5s ease-in-out infinite}
+.big h3{font-size:1.6rem;font-weight:900}
+.big ul{margin-top:.8rem;padding-inline-start:1.2rem;color:var(--mut)}
+.f{padding:1.3rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,300% 300%;animation:rgbshift2 7s linear infinite;transition:transform .2s}
+.f:hover{transform:translateY(-3px)}
+.f h3{font-size:1.1rem}
+.f p{color:var(--mut);font-size:.92rem}
+.steps{display:flex;gap:.4rem;margin-top:.8rem}
+.steps b{padding:0 .65rem;border:1px solid var(--line);border-radius:.5rem;color:var(--cyan);font-size:.85rem}
+@media(max-width:860px){.why{grid-template-columns:1fr}.big{grid-row:auto;min-height:260px}}
+.live{display:grid;gap:1rem;grid-template-columns:1.4fr 1fr;margin-top:2rem}
+.feat{position:relative;min-height:320px;display:flex;align-items:flex-end;padding:1.2rem;border:1px solid rgba(190,140,255,.4);border-radius:1.2rem;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.9)),radial-gradient(70% 70% at 30% 20%,#5b21b6,#0e0e1c);animation:pulseglow 6s ease-in-out infinite}
+.badge{position:absolute;top:1rem;inset-inline-start:1rem;padding:0 .8rem;border-radius:.5rem;background:#ff3b5c;color:#fff;font-weight:700;font-size:.85rem}
+.badge::after{content:"";display:inline-block;width:7px;height:7px;margin-inline-start:.4rem;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+.vw{position:absolute;top:1rem;inset-inline-end:1rem;padding:0 .7rem;border-radius:.5rem;background:rgba(0,0,0,.7);font-size:.9rem}
+.row{display:flex;align-items:center;gap:.8rem;margin-top:.7rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:1rem;background:rgba(14,14,20,.75);text-align:start}
+.row:first-child{margin-top:0}
+.row .tx{flex:1;min-width:0}
+.row small{display:block;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.th{width:84px;height:52px;flex:none;border-radius:.6rem;background:linear-gradient(135deg,#4c1d95,#0e0e1c)}
+.row em{font-style:normal;padding:0 .6rem;border-radius:.5rem;background:rgba(255,59,92,.12);color:#ff7088;font-size:.85rem}
+@media(max-width:860px){.live{grid-template-columns:1fr}}
+.seg{display:inline-flex;gap:.3rem;margin-top:1.5rem;padding:.3rem;border:1px solid var(--line);border-radius:1rem;background:rgba(14,14,20,.75)}
+.seg button{padding:.45rem 1.5rem;border:0;border-radius:.8rem;background:none;color:var(--mut);font-weight:700}
+.seg button[aria-pressed=true]{background:var(--grad);color:#12051f}
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:1rem;align-items:end;margin-top:2.5rem}
+.pc{padding:1.4rem 1rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,300% 300%;animation:rgbshift2 7s linear infinite}
+.pc.r1{padding-block:2rem;border-color:rgba(255,200,61,.55);background:linear-gradient(180deg,rgba(255,200,61,.08),var(--card));animation:none;box-shadow:0 0 26px rgba(255,200,61,.22)}
+.av{display:grid;place-items:center;width:64px;height:64px;margin:0 auto .5rem;border:3px solid var(--blue);border-radius:50%;background:radial-gradient(circle at 40% 30%,#a86bff,#170a2e);font-weight:900;font-size:1.4rem;box-shadow:0 0 14px rgba(157,92,255,.4)}
+.r1 .av{width:84px;height:84px;border-color:var(--gold);box-shadow:0 0 22px rgba(255,200,61,.5)}
+.rk{font-weight:900;color:var(--cyan)}
+.r1 .rk{color:var(--gold)}
+.lv{color:var(--cyan);font-weight:700;font-size:.9rem}
+.pc small{display:block}
+#rank{margin-top:1rem}
+@media(max-width:700px){.podium{grid-template-columns:1fr}.pc.r1{order:-1}}
+.search{display:block;width:100%;max-width:460px;margin:1.5rem auto 0;padding:.75rem 1.2rem;border:1px solid var(--line);border-radius:1rem;background:rgba(14,14,20,.75);color:var(--ice);font:inherit}
+.gangs{display:grid;gap:1rem;margin-top:2rem;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.g{padding:1.2rem 1rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(180deg,rgba(157,92,255,.15),rgba(14,14,20,0) 70%) padding-box,linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,auto,300% 300%;animation:rgbshift3 7s linear infinite}
+.g .av{width:56px;height:56px;font-size:1.2rem}
+.g .lv{display:inline-block;padding:0 .7rem;border:1px solid var(--line);border-radius:.5rem;font-size:.8rem}
+.g button{width:100%;margin-top:.8rem;padding:.4rem;border:1px solid rgba(201,139,255,.55);border-radius:.7rem;background:rgba(157,92,255,.1);color:#dfc2ff;font-weight:700;font-size:.9rem;transition:.2s}
+.g button:hover{background:rgba(157,92,255,.24)}
+.g button:disabled{border-color:var(--line);background:rgba(255,255,255,.03);color:var(--mut);cursor:default}
+.cats{display:grid;gap:1rem;margin-top:2rem;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.cat{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.2rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,300% 300%;animation:rgbshift2 7s linear infinite;transition:transform .2s,box-shadow .2s}
+.cat:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(157,92,255,.35)}
+.cat h3{font-size:1.05rem}
+.cat small{color:var(--mut)}
+.cat b{color:var(--cyan)}
+.gal{display:grid;gap:1rem;margin-top:2rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.shot{display:flex;align-items:flex-end;justify-content:space-between;aspect-ratio:4/3;padding:.8rem 1rem;border:1px solid rgba(190,140,255,.35);border-radius:1.2rem;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.9)),linear-gradient(135deg,#4c1d95,#0e0e1c);animation:pulseglow 7s ease-in-out infinite}
+.shot span{color:var(--gold)}
+.cta2{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:2rem;border:1px solid rgba(190,140,255,.4);border-radius:1.5rem;background:radial-gradient(60% 120% at 100% 0,rgba(157,92,255,.25),var(--card));animation:pulseglow 6s ease-in-out infinite}
+.cta2 h2{font-size:1.6rem}
+footer{position:relative;overflow:hidden;margin-top:3rem;padding:3rem 0 5rem;border-top:1px solid var(--line)}
+footer::before{content:"";position:absolute;inset-inline:0;top:0;height:1px;background:linear-gradient(90deg,#9d5cff,#ff4fd8,#ffc83d,#4fd8ff,#9d5cff);background-size:300% 100%;animation:rgbshift 6s linear infinite}
+footer::after{content:"AZADEGAN";position:absolute;inset-inline:0;bottom:-1.2rem;direction:ltr;text-align:center;font-weight:900;font-size:clamp(4rem,16vw,12rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(157,92,255,.28);pointer-events:none}
+.fg{position:relative;z-index:1;display:grid;gap:2rem;grid-template-columns:1.6fr 1fr 1fr}
+.fg h4{margin-bottom:.4rem}
+.fg a{display:block;padding:.1rem 0;color:var(--mut)}
+.fg a:hover{color:#ffd6f7}
+.legal{position:relative;z-index:1;margin-top:2rem;color:var(--mut);font-size:.85rem}
+@media(max-width:700px){.fg{grid-template-columns:1fr 1fr}.fg>:first-child{grid-column:1/-1}}
+#panel .demo{padding:.4rem 1rem;background:#14141f;color:#cfc8e0;font-size:.85rem;text-align:center;border-radius:.6rem;margin-top:1rem}
+#panel #me{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+#panel h1{font-size:1.8rem;font-weight:900}
+#panel h2{font-size:1.25rem;font-weight:900;margin-top:1.8rem}
+#panel .card h2{margin-top:0}
+#panel .sub{color:var(--mut)}
+#panel .card{margin-top:1rem;padding:1.4rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,300% 300%;animation:rgbshift2 8s linear infinite}
+#panel .narrow{max-width:460px;margin:3rem auto}
+#panel .btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem 1.3rem;border:1px solid var(--line);border-radius:.8rem;background:var(--card);font-weight:700}
+#panel .btn.p{background:linear-gradient(90deg,#9d5cff,#ff4fd8,#ffc83d,#4fd8ff,#9d5cff);background-size:300% 100%;border-color:transparent;color:#12051f;animation:rgbshift 3s linear infinite}
+#panel .btn:hover{filter:brightness(1.15)}
+#panel input,#panel select,#panel textarea{display:block;width:100%;margin:.4rem 0 .8rem;padding:.7rem 1rem;border:1px solid var(--line);border-radius:.8rem;background:rgba(0,0,0,.8);color:var(--ice);font:inherit}
+#panel label{display:block;color:var(--mut);font-size:.9rem}
+#panel .seg{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1.5rem;padding:.3rem;border:1px solid var(--line);border-radius:1rem;background:rgba(14,14,20,.75)}
+#panel .seg button{flex:1;padding:.5rem 1rem;border:0;border-radius:.8rem;background:none;color:var(--mut);font-weight:700}
+#panel .seg button[aria-pressed=true]{background:var(--grad);color:#12051f}
+#panel .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+#panel .chip{padding:.15rem .9rem;border:1px solid var(--line);border-radius:.7rem;background:rgba(0,0,0,.8);color:var(--ice);font:inherit;font-size:.92rem}
+#panel button.chip:hover{border-color:var(--cyan)}
+#panel .chip.on{background:var(--grad);border-color:transparent;color:#12051f;font-weight:700}
+#panel .grid2{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+#panel .num{font-size:2rem;font-weight:900;color:var(--cyan)}
+#panel .items{display:grid;gap:1rem;margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+#panel .items .card{margin:0;display:flex;flex-direction:column;gap:.6rem}
+#panel .row{display:flex;align-items:center;gap:.6rem;margin-top:.7rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:1rem;background:rgba(14,14,20,.75)}
+#panel .row .tx{flex:1;min-width:0}
+#panel .row small{display:block;color:var(--mut)}
+#panel .st{padding:0 .8rem;border-radius:.5rem;background:rgba(157,92,255,.12);color:#dfc2ff;font-size:.85rem}
+#panel .row>b{min-width:7rem}
+#toast{position:fixed;inset-inline:0;bottom:1.2rem;width:fit-content;max-width:90%;margin:auto;padding:.6rem 1.4rem;border-radius:.8rem;background:#14141f;color:#fff;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:0 0 20px rgba(157,92,255,.4)}
+#toast.on{opacity:1}
+#panel h2.sec{font-size:clamp(1.7rem,4vw,2.4rem);margin-top:.6rem}
+.sf{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.sf button{padding:.2rem 1rem;border:1px solid var(--line);border-radius:.7rem;background:var(--card);color:var(--ice);font:inherit}
+.sf button[aria-pressed=true]{background:var(--grad);border-color:transparent;color:#12051f;font-weight:700}
+.si{display:flex;flex-direction:column;gap:.4rem;padding:1.1rem 1.2rem;border:1px solid transparent;border-radius:1.2rem;background:linear-gradient(var(--card),var(--card)) padding-box,var(--rgb) border-box;background-size:auto,300% 300%;animation:rgbshift2 8s linear infinite;transition:transform .2s}
+.si:hover{transform:translateY(-3px)}
+.si img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:.8rem}
+.si .pr{color:var(--cyan);font-weight:900}
+.si .btn{margin-top:.3rem}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- پس‌زمینه متحرک شهر -->
+<div id="citybg" aria-hidden="true">
+  <div class="stars"></div><div class="neb"></div><div class="moon"></div>
+  <svg class="hills" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice">
+    <defs><filter id="sg" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <path d="M0 320 L0 205 C100 180 160 190 240 172 C300 140 360 158 430 146 C500 122 560 138 620 126 C690 108 750 126 810 116 C880 128 940 120 1010 138 C1080 150 1140 144 1200 168 L1200 320 Z" fill="#06060d"/>
+    <path d="M0 320 L0 240 C140 214 220 226 320 210 C420 196 520 206 620 198 C760 190 880 202 1000 212 C1100 220 1160 216 1200 228 L1200 320 Z" fill="#04040a"/>
+    <g filter="url(#sg)"><g id="signrow"></g></g>
+  </svg>
+  <svg id="sky-far" class="sky far" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice"></svg>
+  <div class="fog"></div>
+  <svg id="sky-near" class="sky near" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice"></svg>
+  <div class="beam"></div>
+  <div class="shade"></div>
+  <div class="road"><span class="lane"></span><span class="lane r"></span></div>
+  <svg class="palm" viewBox="0 0 80 120"><path d="M40 120 L41 42" stroke="#08080f" stroke-width="7" fill="none"/><path d="M41 42 Q12 30 2 46 Q24 40 41 46 Z M41 42 Q70 30 78 46 Q58 40 41 46 Z M41 42 Q26 12 6 18 Q30 22 41 44 Z M41 42 Q56 12 74 18 Q52 22 41 44 Z M41 42 Q40 6 54 2 Q44 20 43 42 Z" fill="#08080f"/></svg>
+  <svg class="palm p2" viewBox="0 0 80 120"><path d="M40 120 L41 42" stroke="#08080f" stroke-width="7" fill="none"/><path d="M41 42 Q12 30 2 46 Q24 40 41 46 Z M41 42 Q70 30 78 46 Q58 40 41 46 Z M41 42 Q26 12 6 18 Q30 22 41 44 Z M41 42 Q56 12 74 18 Q52 22 41 44 Z M41 42 Q40 6 54 2 Q44 20 43 42 Z" fill="#08080f"/></svg>
+</div>
+
+<header><div class="wrap">
+  <a class="logo" href="#"><i>آ</i>شهر آزادگان</a>
+  <nav><a href="#why">درباره شهر</a><a href="#live">پخش زنده</a><a href="#fame">تالار افتخار</a><a href="#join">عضوگیری</a><a href="#shop">فروشگاه</a><a href="#gallery">گالری</a><a href="#wallet">کیف پول</a><a href="#tickets">تیکت</a></nav>
+  <span style="display:flex;gap:.6rem"><a class="btn" id="panelLink" href="#wallet">کیف پول</a><a class="btn p" href="#start">شروع بازی</a></span>
+</div></header>
+
+<main>
+<div class="hero"><div class="wrap">
+  <span class="tag">سرور رول‌پلی فارسی</span>
+  <h1>شهر آزادگان</h1>
+  <p>شهری با قانون، شغل و اقتصاد واقعی؛ هر شب یک داستان تازه، به دست خود بازیکن‌ها.</p>
+  <div class="cta"><a class="btn p" href="#start">شروع بازی</a><a class="btn" data-discord href="#" target="_blank" rel="noopener">دیسکورد</a></div>
+  <div class="stats" id="stats"></div>
+</div></div>
+
+<section id="why"><div class="wrap">
+  <span class="tag">چرا آزادگان؟</span>
+  <h2>شهری که هیچ شبش شبیه شب قبل نیست</h2>
+  <div class="why">
+    <div class="big"><h3>یک زندگی دوم، جدی و واقعی</h3>
+      <ul><li>گنگ‌ها، شغل‌ها و رقابت‌های کامیونیتی</li><li>فروشگاه ماشین، لباس و آیتم با اقتصاد پویا</li><li>رتبه‌بندی بازیکن‌ها و رویدادهای ماهانه</li></ul></div>
+    <div class="f"><h3>شروع در ۴ مرحله</h3><p>ثبت‌نام، نصب، اتصال و ساخت شخصیت.</p><div class="steps"><b>۱</b><b>۲</b><b>۳</b><b>۴</b></div></div>
+    <div class="f"><h3>قوانین شفاف</h3><p>قوانین روشن و برخورد یکسان با همه بازیکن‌ها.</p></div>
+    <div class="f"><h3>پشتیبانی ۲۴ ساعته</h3><p>از طریق سیستم تیکت سایت، همیشه پاسخ‌گو.</p></div>
+    <div class="f"><h3>کامیونیتی دیسکورد</h3><p>با شهروندها آشنا شو و خبرها را از دست نده.</p></div>
+  </div>
+</div></section>
+
+<section id="live" style="padding-top:0"><div class="wrap">
+  <span class="tag">پخش زنده</span>
+  <h2>همین حالا از نگاه استریمرها</h2>
+  <p class="sub">زندگی در آزادگان را از دید بازیکن‌ها تماشا کن.</p>
+  <div class="live"><div class="feat" id="feat"></div><div id="srows"></div></div>
+</div></section>
+
+<section id="fame"><div class="wrap center">
+  <span class="tag">برترین‌ها</span>
+  <h2>تالار افتخار آزادگان</h2>
+  <p class="sub">بهترین‌های شهر در هر دسته؛ شاید نفر بعدی تو باشی.</p>
+  <div class="seg" id="tabs"><button type="button" aria-pressed="true" data-t="players">بازیکنان</button><button type="button" aria-pressed="false" data-t="groups">گروه‌ها</button></div>
+  <div class="podium" id="podium"></div>
+  <div id="rank"></div>
+</div></section>
+
+<section id="join" style="padding-top:0"><div class="wrap center">
+  <span class="tag">عضوگیری</span>
+  <h2>آگهی‌های عضوگیری</h2>
+  <p class="sub">فرصت عضویت در گنگ‌ها و شغل‌های مختلف شهر.</p>
+  <input class="search" id="q" type="search" placeholder="جستجو در گنگ‌ها..." aria-label="جستجو در گنگ‌ها">
+  <div class="gangs" id="gangs"></div>
+</div></section>
+
+<section id="shop" style="padding-top:0"><div class="wrap">
+  <span class="tag">فروشگاه رسمی</span>
+  <h2>فروشگاه شهر آزادگان</h2>
+  <p class="sub">ماشین، لباس، کاراکتر و آیتم‌های ویژه؛ تحویل فوری داخل شهر.</p>
+  <div class="sf" id="sf"></div><div class="cats" id="cats"></div>
+</div></section>
+
+<section id="gallery" style="padding-top:0"><div class="wrap">
+  <span class="tag">لحظه‌های ثبت‌شده توسط شهروندان</span>
+  <h2>گالری شهر آزادگان</h2>
+  <p class="sub">عکس‌ها و ویدیوهای شهر، ثبت‌شده توسط خود شما.</p>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<div id="panel">
+<section id="login" style="padding-block:2.5rem"><div class="wrap">
+  <span class="tag">حساب شهروندی</span>
+  <h2 class="sec">ورود و ثبت‌نام</h2>
+  <p class="sub">برای کیف پول، تیکت‌ها و نقش‌ها اول با نام کاربری و رمز عبور وارد شو یا ثبت‌نام کن.</p>
+  <div class="demo">نسخه نمایشی: کیف پول و تیکت‌ها فعلاً فقط داخل همین مرورگر ذخیره می‌شوند و بین کاربرها مشترک نیستند.</div>
+  <div id="acct"></div>
+</div></section>
+<section id="wallet" style="padding-block:2.5rem"><div class="wrap">
+  <span class="tag">کیف پول</span>
+  <h2 class="sec">کیف پول و AZ Coin</h2>
+  <p class="sub">شارژ کیف پول، خرید AZ Coin و فروشگاه VIP برای گنگ و ماشین.</p>
+  <div id="v-wallet"></div>
+</div></section>
+<section id="tickets" style="padding-block:2.5rem"><div class="wrap">
+  <span class="tag">پشتیبانی</span>
+  <h2 class="sec">تیکت‌ها</h2>
+  <p class="sub">ثبت درخواست عضویت، پیگیری تیکت‌ها و تیکت‌های هر نقش، همه یک‌جا.</p>
+  <div id="v-tickets"></div>
+</div></section>
+<section id="gangreg" style="padding-block:2.5rem"><div class="wrap">
+  <span class="tag">گنگ‌ها</span>
+  <h2 class="sec">ثبت گنگ</h2>
+  <p class="sub">نام گنگ ثبت می‌شود و در تیکت عضویت و نقش‌ها ظاهر می‌شود.</p>
+  <div id="v-gangs"></div>
+</div></section>
+<section id="admin" hidden style="padding-block:2.5rem"><div class="wrap">
+  <span class="tag">مدیریت</span>
+  <h2 class="sec">پنل ادمین فروشگاه</h2>
+  <p class="sub">افزودن، ویرایش و حذف ماشین‌ها و آیتم‌های فروشگاه.</p>
+  <div id="admin-body"></div>
+</div></section>
+</div>
+
+<section id="start" style="padding-top:0"><div class="wrap">
+  <div class="cta2">
+    <div><h2>آماده‌ای وارد شهر شوی؟</h2><p class="sub">همین حالا وصل شو و اولین شبت را شروع کن.</p></div>
+    <div class="cta"><button class="btn p" type="button" data-copy>کپی آدرس سرور</button><a class="btn" data-discord href="#" target="_blank" rel="noopener">دیسکورد</a></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="fg">
+    <div><h4>شهر آزادگان</h4><p class="sub">تجربه رول‌پلی فارسی با شغل، گنگ و اقتصاد زنده.</p></div>
+    <div><h4>دسترسی سریع</h4><a href="#why">درباره شهر</a><a href="#fame">تالار افتخار</a><a href="#join">عضوگیری</a><a href="#shop">فروشگاه</a></div>
+    <div><h4>کامیونیتی</h4><a data-discord href="#" target="_blank" rel="noopener">دیسکورد</a><a href="#live">پخش زنده</a><a href="#gallery">گالری</a></div>
+  </div>
+  <p class="legal">© شهر آزادگان. این پروژه مستقل است و وابسته به Rockstar Games، Take-Two یا FiveM نیست.</p>
+</div></footer>
+
+<script>
+// تنظیمات: این دو مقدار را عوض کنید
+const CONFIG = { discord: "https://discord.gg/REPLACE_ME", ip: "play.example.ir" };
+
+// داده‌های نمونه؛ بعداً به API یا دیتابیس خودتان وصل کنید
+const DATA = {
+  stats: [["بازیکن آنلاین", 120], ["گنگ فعال", 12], ["شغل رسمی", 8]],
+  streams: [["streamer_one", "شب اول در شهر", 15], ["streamer_two", "گشت‌زنی با پلیس", 12], ["streamer_three", "ماجراجویی در بندر", 3]],
+  players: [["آرمان رضایی", "گروه نهنگ‌ها", 50], ["نیما کاظمی", "گروه ققنوس", 49], ["سارا مرادی", "بدون گروه", 48], ["کیان صادقی", "گروه کویر", 47], ["پویا نظری", "بدون گروه", 46], ["مهدی فرجی", "گروه شاهین", 45]],
+  groups: [["نهنگ‌ها", "۱۲ عضو", 50], ["ققنوس", "۹ عضو", 47], ["کویر", "۱۱ عضو", 45], ["شاهین", "۸ عضو", 44], ["طوفان", "۷ عضو", 42], ["موج", "۶ عضو", 40]],
+  gangs: [["نهنگ‌ها", 19, 1], ["ققنوس", 20, 1], ["کویر", 20, 0], ["پلنگ‌ها", 21, 1], ["سایه", 23, 1], ["طوفان", 26, 0], ["شاهین", 18, 1], ["موج", 18, 1], ["فولاد", 19, 1], ["پارسه", 19, 0], ["آتلانتا", 19, 1], ["هیرکان", 19, 1]],
+  cats: [["وسایل نقلیه", "ماشین، موتور، قایق و بالگرد", 19], ["لباس", "استایل کاراکتر", 2], ["کاراکتر", "پوست و ظاهر", 2], ["حیوان خانگی", "همراه وفادار برای شهر", 0], ["اقلام گنگ", "مخصوص گنگ‌ها", 0], ["سیم‌کارت", "شماره اختصاصی", 0], ["عینک و اکسسوری", "مردانه و زنانه", 2], ["وسایل ویژه", "آیتم‌های خاص و محدود", 0]],
+  gallery: [["عکاس اول", 21], ["عکاس دوم", 37], ["عکاس سوم", 18], ["عکاس چهارم", 13], ["عکاس پنجم", 11], ["عکاس ششم", 6]]
+};
+
+const $ = s => document.querySelector(s);
+const fa = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+
+ $("#stats").innerHTML = DATA.stats.map(([l, v]) => `<span>${l}<b>${fa(v)}</b></span>`).join("");
+
+const [f, ...rest] = DATA.streams;
+ $("#feat").innerHTML = `<span class="badge">LIVE</span><span class="vw">${fa(f[2])} بیننده</span><div><b>${f[0]}</b><small class="sub" style="display:block">${f[1]}</small></div>`;
+ $("#srows").innerHTML = rest.map(([n, t, v]) => `<div class="row"><div class="th"></div><div class="tx"><b>${n}</b><small>${t}</small></div><em>${fa(v)} بیننده</em></div>`).join("");
+
+let tab = "players";
+function fame() {
+  const L = DATA[tab];
+  $("#podium").innerHTML = [1, 0, 2].map(i => {
+    const [n, s, l] = L[i];
+    return `<div class="pc${i == 0 ? " r1" : ""}"><div class="av">${n[0]}</div><div class="rk">#${fa(i + 1)}</div><b>${n}</b><div class="lv">سطح ${fa(l)}</div><small class="sub">${s}</small></div>`;
+  }).join("");
+  $("#rank").innerHTML = L.slice(3).map(([n, s, l], i) => `<div class="row"><b class="sub">#${fa(i + 4)}</b><div class="tx"><b>${n}</b><small>${s}</small></div><span class="lv">سطح ${fa(l)}</span></div>`).join("");
+}
+document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
+  tab = b.dataset.t;
+  document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-pressed", x == b));
+  fame();
+});
+fame();
+
+const he = s => String(s).replace(/[&<>"']/g, c => "&#" + c.charCodeAt(0) + ";");
+function gangs(q = "") {
+  const list = (window.AZ_gangs ? AZ_gangs() : ["بالاس", "گروو استریت", "کارتل", "داعش", "مافیا"]).filter(n => n.includes(q.trim()));
+  $("#gangs").innerHTML = list.map(n => `<div class="g"><div class="av">${he(n[0])}</div><b>${he(n)}</b><button type="button" data-join="${he(n)}">درخواست عضویت</button></div>`).join("") || `<p class="sub">گنگی پیدا نشد.</p>`;
+}
+window.AZ_refreshGangs = () => gangs($("#q").value);
+ $("#q").oninput = e => gangs(e.target.value);
+gangs();
+
+ $("#gal").innerHTML = DATA.gallery.map(([a, l]) => `<div class="shot"><b>${a}</b><span>${fa(l)} ♥</span></div>`).join("");
+
+// ===== ساخت پس‌زمینه متحرک شهر: تابلوی AZADEGAN CITY + آسمان‌خراش‌ها =====
+(function () {
+  const word = "AZADEGAN CITY", sw = 58, sx = 600 - (word.length - 1) * sw / 2;
+  $("#signrow").innerHTML = [...word].map((ch, i) =>
+    `<text x="${sx + i * sw}" y="196" class="lt" style="animation-delay:-${((i * 1.37) % 9).toFixed(2)}s;animation-duration:${8 + (i % 5)}s">${ch == " " ? "" : ch}</text>`
+  ).join("");
+  function skyline(el, n, fill, w1, w2, h0, h1, winChance) {
+    let out = ""; const W = 1200 / n;
+    for (let i = 0; i < n; i++) {
+      const bw = W * (.66 + ((i * 37) % 10) / 26), bh = h0 + ((i * 53) % (h1 - h0)), bx = i * W + (W - bw) / 2, by = 300 - bh;
+      out += `<rect x="${bx.toFixed(1)}" y="${by}" width="${bw.toFixed(1)}" height="${bh}" fill="${fill}"/>`;
+      const cols = Math.max(2, Math.floor(bw / 11)), rows = Math.max(2, Math.floor(bh / 15));
+      for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++)
+        if (((i * 7 + c * 13 + r * 29) % 12) < winChance)
+          out += `<rect x="${(bx + 5 + c * 11).toFixed(1)}" y="${by + 7 + r * 15}" width="3.6" height="5.4" fill="${((i + c + r) % 3) ? w1 : w2}" class="wd" style="animation-delay:-${((c * 3 + r * 2) % 9)}s"/>`;
+      if (i % 4 == 1) out += `<rect x="${(bx + bw / 2 - 1).toFixed(1)}" y="${by - 16}" width="2" height="16" fill="${fill}"/><circle cx="${(bx + bw / 2).toFixed(1)}" cy="${by - 17}" r="2.4" fill="#ff5c7a" class="bl"/>`;
+      if (i % 7 == 3) out += `<circle cx="${(bx + bw / 2).toFixed(1)}" cy="${by - 10}" r="3" fill="#7fe3ff" class="bl"/>`;
+    }
+    document.getElementById(el).innerHTML = out;
+  }
+  skyline("sky-far", 14, "#0b0b16", "#5e74a8", "#c9d6ff", 70, 150, 4);
+  skyline("sky-near", 10, "#06060c", "#ffc36b", "#9fdcff", 120, 240, 5);
+})();
+
+document.querySelectorAll("[data-discord]").forEach(a => a.href = CONFIG.discord);
+document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
+  const label = btn.textContent;
+  try { await navigator.clipboard.writeText("connect " + CONFIG.ip); btn.textContent = "کپی شد"; }
+  catch (e) { btn.textContent = "کپی نشد"; }
+  setTimeout(() => btn.textContent = label, 1800);
+}));
+
+// قبل از ورود، به‌جای پنل دکمه‌ی ورود با استیم نشان داده می‌شود
+fetch("/api/me").then(r => {
+  if (!r.ok) { const a = document.getElementById("panelLink"); a.textContent = "ورود / ثبت‌نام"; a.href = "#login"; }
+}).catch(() => {});
+</script>
+<div id="toast" role="status"></div>
+<script>
+(() => {
+
+// تنظیمات: هر AZ Coin چند تومان است و چه چیزهایی VIP فروخته می‌شود
+const CFG = { rate: 10000, topups: [50000, 100000, 200000] };
+
+const JOBS = ["یگان امداد", "پیشگیری", "راهور", "نوپو", "مکانیکی", "مدیک", "وزارت اطلاعات", "رستوران سنتی", "کت کافه", "ارتش", "سپاه", "مرزبانی", "دادگستری", "بانک مرکزی", "کاردیلری", "کایو"];
+const GANGS0 = ["بالاس", "گروو استریت", "کارتل", "داعش", "مافیا"];
+const POLICE = ["یگان امداد", "پیشگیری", "راهور", "نوپو"];
+// نقش → جاب‌هایی که تیکت عضویتشان را می‌بیند
+const ROLES = {
+  "فرمانده کل نیروی انتظامی": POLICE, "معاونت فرماندهی انتظامی": POLICE,
+  "فرمانده یگان امداد": ["یگان امداد"], "فرمانده راهور": ["راهور"], "فرمانده پیشگیری": ["پیشگیری"], "فرمانده نوپو": ["نوپو"],
+  "ریاست مکانیکی": ["مکانیکی"], "ریاست مدیک": ["مدیک"],
+  "وزیر اطلاعات": ["وزارت اطلاعات"], "جانشین وزیر اطلاعات": ["وزارت اطلاعات"],
+  "ریاست رستوران سنتی": ["رستوران سنتی"], "ریاست کت کافه": ["کت کافه"],
+  "فرمانده ارتش": ["ارتش"], "جانشین فرمانده ارتش": ["ارتش"],
+  "فرمانده سپاه": ["سپاه"], "جانشین فرمانده سپاه": ["سپاه"],
+  "فرمانده مرزبانی": ["مرزبانی"], "جانشین فرمانده مرزبانی": ["مرزبانی"],
+  "دادستان": ["دادگستری"], "معاون دادستان": ["دادگستری"],
+  "رییس بانک مرکزی": ["بانک مرکزی"], "ریاست کایو": ["کایو"], "ریاست کاردیلری": ["کاردیلری"]
+};
+const P = "ریاست گنگ ", STAFF = "مدیر استف";
+
+const KEY = "azadegan_panel";
+let S = { user: null, toman: 0, az: 0, tickets: [], gangs: GANGS0.slice(), log: [], role: "" };
+try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+S.user = null; S.me = null; // ورود هیچ‌وقت ذخیره نمی‌شود؛ هر بار باید دوباره وارد شد
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ ...S, user: null, me: null })); } catch (e) {} };
+const fmt = n => Number(n).toLocaleString("fa-IR");
+const esc = s => String(s).replace(/[&<>"']/g, c => "&#" + c.charCodeAt(0) + ";");
+const $ = s => document.querySelector(s), app = $("#app");
+let view = "wallet", T = { type: "job", target: "" };
+let tt = "new"; // تب فعال بخش تیکت‌ها
+
+function toast(t) { const e = $("#toast"); e.textContent = t; e.classList.add("on"); setTimeout(() => e.classList.remove("on"), 2400); }
+function scopeOf(rs) {
+  const o = { staff: 0, jobs: [], gangs: [] };
+  rs.forEach(r => { if (r == STAFF) o.staff = 1; else if (r.startsWith(P)) o.gangs.push(r.slice(P.length)); else o.jobs.push(...(ROLES[r] || [])); });
+  return o;
+}
+const tlist = (l, act) => l.map(t => `<div class="row"><div class="tx"><b>${esc(t.subject)}</b><small>${t.type == "job" ? "جاب" : t.type == "gang" ? "گنگ" : "استف"}: ${esc(t.target)} · ${esc(t.by)}</small><p class="sub">${esc(t.msg)}</p></div>${act && t.status == "باز" ? `<button class="btn p" data-act="ok" data-v="${t.id}">پذیرش</button><button class="btn" data-act="no" data-v="${t.id}">رد</button>` : `<span class="st">${t.status}</span>`}</div>`).join("") || `<p class="sub" style="margin-top:.8rem">موردی نیست.</p>`;
+
+let A = { mode: "login", step: 1, phone: "" };
+async function api(path, body) {
+  try {
+    const r = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    return { ok: r.ok, ...(await r.json().catch(() => ({}))) };
+  } catch (e) { return { ok: false, error: "سرور در دسترس نیست" }; }
+}
+
+const V = {
+  register: () => {
+    const m = A.mode, user = `<label>نام کاربری<input name="username" required minlength="3" maxlength="20" dir="ltr" autocomplete="username"></label>`;
+    const body = m == "login"
+      ? `<form id="lg">${user}<label>رمز عبور<input name="password" type="password" required autocomplete="current-password"></label><button class="btn p" style="width:100%">ورود</button></form>`
+      : `<form id="su">${user}<p class="sub" style="font-size:.85rem;margin-bottom:.6rem">حروف انگلیسی یا فارسی، عدد و _ (۳ تا ۲۰ کاراکتر)</p>
+          <label>رمز عبور (حداقل ۸ کاراکتر)<input name="password" type="password" minlength="8" required autocomplete="new-password"></label>
+          <label>تکرار رمز<input name="again" type="password" minlength="8" required autocomplete="new-password"></label>
+          <button class="btn p" style="width:100%">ساخت حساب</button></form>`;
+    return `<section class="card narrow"><div class="seg" style="margin-top:0">${[["login", "ورود"], ["signup", "ثبت‌نام"]].map(([k, l]) => `<button type="button" aria-pressed="${m == k}" data-act="mode" data-v="${k}">${l}</button>`).join("")}</div>
+    <div style="margin-top:1rem">${body}</div>
+    ${NOSRV ? `<button type="button" class="btn" style="width:100%;margin-top:1rem" data-act="demo">ورود نمایشی (بدون سرور)</button><button type="button" class="btn" style="width:100%;margin-top:.6rem" data-adm="demo">ورود نمایشی ادمین (بدون سرور)</button><p class="sub" style="margin-top:.6rem;font-size:.85rem">برای ورود واقعی، server.js را اجرا کن و سایت را از همان آدرس باز کن.</p>` : ""}</section>`;
+  },
+
+  wallet: () => `<div class="grid2">
+    <div class="card"><h2>کیف پول</h2><div class="num">${fmt(S.toman)} تومان</div><p class="sub">شارژ کیف پول</p>
+      <div class="chips">${CFG.topups.map(a => `<button class="btn" data-act="top" data-v="${a}">+${fmt(a)}</button>`).join("")}</div></div>
+    <div class="card"><h2>AZ Coin</h2><div class="num">${fmt(S.az)} AZ</div><p class="sub">هر AZ Coin برابر ${fmt(CFG.rate)} تومان</p>
+      <form id="buyaz"><input name="n" type="number" min="1" value="1" aria-label="تعداد"><button class="btn p">خرید AZ Coin</button></form></div></div>
+    <p class="sub" style="margin-top:1.2rem">ماشین‌ها و آیتم‌ها را از بخش <a href="#shop" style="color:var(--cyan)">فروشگاه</a> با AZ Coin بخر.</p>
+    <h2>سوابق</h2>${S.log.slice(0, 8).map(l => `<div class="row">${esc(l)}</div>`).join("") || `<p class="sub">هنوز چیزی ثبت نشده.</p>`}`,
+
+  tickets: () => {
+    const list = T.type == "job" ? JOBS : T.type == "gang" ? S.gangs : [];
+    return `<div class="card"><h2>تیکت جدید</h2>
+    <div class="seg" style="margin-top:.8rem">${[["job", "تیکت جاب"], ["gang", "تیکت گنگ"], ["staff", "تیکت تیم استف"]].map(([k, l]) => `<button type="button" aria-pressed="${T.type == k}" data-act="tt" data-v="${k}">${l}</button>`).join("")}</div>
+    ${list.length ? `<div class="chips">${list.map(x => `<button type="button" class="chip${T.target == x ? " on" : ""}" data-act="tg" data-v="${esc(x)}">${esc(x)}</button>`).join("")}</div>` : `<p class="sub" style="margin:.8rem 0">درخواست عضویت در تیم استف برای ${STAFF}‌ها ارسال می‌شود.</p>`}
+    <form id="tk"><input name="subject" required placeholder="موضوع"><textarea name="msg" required rows="4" placeholder="توضیح درخواست و سابقه رول‌پلی"></textarea><button class="btn p">ارسال تیکت</button></form></div>`;
+  },
+
+  mine: () => tlist(S.tickets.filter(t => t.by == S.user.name), false),
+
+  tk: () => `<div class="seg">${[["new", "ثبت تیکت"], ["mine", "تیکت‌های من"], ["roles", "تیکت رول‌ها"], ["map", "نقش‌ها"]].map(([k, l]) => `<button type="button" aria-pressed="${tt == k}" data-act="tab" data-v="${k}">${l}</button>`).join("")}</div>
+    <div style="margin-top:.4rem">${({ new: V.tickets, mine: V.mine, roles: V.inbox, map: V.rolemap })[tt]()}</div>`,
+
+  inbox: () => {
+    const real = S.me && S.me.roles, roles = [...Object.keys(ROLES), ...S.gangs.map(g => P + g), STAFF];
+    const mine = real ? S.me.roles : (S.role ? [S.role] : []), sc = ADM ? { staff: 1, jobs: JOBS, gangs: S.gangs } : scopeOf(mine);
+    const vis = S.tickets.filter(t => t.type == "job" ? sc.jobs.includes(t.target) : t.type == "gang" ? sc.gangs.includes(t.target) : sc.staff);
+    return `<div class="card">${ADM ? `<p class="sub">دسترسی ادمین: همه‌ی تیکت‌های جاب، گنگ و تیم استف.</p>` : real
+      ? `<p class="sub">نقش‌های تو: ${mine.length ? mine.map(esc).join("، ") : "بدون نقش"}</p>`
+      : `<p class="sub">نقش آزمایشی (فقط دمو؛ با سرور، نقش‌ها از حساب استیم می‌آیند):</p><select name="role"><option value="">بازیکن عادی</option>${roles.map(r => `<option${r == S.role ? " selected" : ""}>${esc(r)}</option>`).join("")}</select>`}</div>
+    ${mine.length || ADM ? tlist(vis, true) : `<p class="sub" style="margin-top:1rem">این نقش به هیچ تیکتی دسترسی ندارد.</p>`}`;
+  },
+
+  rolemap: () => {
+    const who = j => Object.keys(ROLES).filter(r => ROLES[r].includes(j)).join("، ");
+    return `<p class="sub">این نقش‌ها تیکت عضویت همان بخش را می‌بینند و جواب می‌دهند.</p>
+    ${JOBS.map(j => `<div class="row"><b>${j}</b><span class="sub tx">${who(j)}</span></div>`).join("")}
+    ${S.gangs.map(g => `<div class="row"><b>گنگ ${esc(g)}</b><span class="sub tx">${P}${esc(g)}</span></div>`).join("")}
+    <div class="row"><b>تیم استف</b><span class="sub tx">${STAFF}</span></div>`;
+  },
+
+  gangs: () => `<div class="card"><h2>ثبت گنگ</h2><p class="sub">نام گنگ ثبت می‌شود و برای تیکت عضویت و نقش «${P}…» در دسترس قرار می‌گیرد.</p>
+    <form id="gg" style="margin-top:1rem"><input name="name" required placeholder="اسم گنگ"><button class="btn p">ثبت گنگ</button></form></div>
+    <div class="chips">${S.gangs.map(g => `<span class="chip">${esc(g)}</span>`).join("")}</div>`
+};
+
+const cache = {};
+function put(id, html) { const e = $("#" + id); if (e && cache[id] !== html) { cache[id] = html; e.innerHTML = html; } }
+const lock = `<div class="card"><p class="sub">برای استفاده از این بخش اول وارد شو.</p><a class="btn p" href="#login" style="margin-top:.8rem">ورود / ثبت‌نام</a></div>`;
+function render() {
+  const tk0 = document.getElementById("tk"), keep = tk0 ? [tk0.subject.value, tk0.msg.value] : ["", ""];
+  put("acct", S.user
+    ? `<div class="card"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:.6rem"><b>خوش آمدی، ${esc(S.user.name)}</b><span class="chip">${fmt(S.toman)} تومان</span><span class="chip">${fmt(S.az)} AZ</span><button class="btn" data-act="out">خروج</button></div></div>`
+    : V.register());
+  [["wallet", "wallet"], ["tickets", "tk"], ["gangs", "gangs"]].forEach(([id, k]) => put("v-" + id, S.user ? V[k]() : lock));
+  const tk = document.getElementById("tk");
+  if (tk) { tk.subject.value = keep[0]; tk.msg.value = keep[1]; }
+  renderShop(); renderAdmin();
+  if (window.AZ_refreshGangs) AZ_refreshGangs();
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act, v = b.dataset.v;
+  if (a == "view") view = v;
+  else if (a == "top") { S.toman += +v; S.log.unshift("شارژ کیف پول: " + fmt(+v) + " تومان"); }
+  else if (a == "tt") T = { type: v, target: "" };
+  else if (a == "tg") T.target = v;
+  else if (a == "ok" || a == "no") S.tickets.find(t => t.id == v).status = a == "ok" ? "پذیرفته شد" : "رد شد";
+  else if (a == "tab") tt = v;
+  else if (a == "mode") A = { mode: v, step: 1, phone: "" };
+  else if (a == "demo") S.user = { name: "کاربر نمایشی" };
+  else if (a == "out") { S.user = null; S.me = null; ADM = false; E = null; save(); if (!NOSRV) { location.href = "/auth/logout"; return; } }
+  save(); render();
+});
+
+document.addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, d = Object.fromEntries(new FormData(f));
+  if (f.id == "af") {
+    const it = { id: d.id, name: d.name.trim(), cat: d.cat.trim(), price: Math.round(+d.price), img: d.img.trim() };
+    if (NOSRV) { if (it.id) shop = shop.map(x => x.id == it.id ? it : x); else shop.push({ ...it, id: "x" + Date.now() }); S.shop = shop; }
+    else { const r = await api("/api/admin/shop", { op: "save", item: it }); if (!r.ok) return toast(r.error || "ذخیره نشد"); shop = r.items; }
+    E = null; toast("ذخیره شد"); save(); return render();
+  }
+  if (f.id == "lg") { const r = await api("/api/login", d); return r.ok ? boot().then(() => { location.hash = ADM ? "#admin" : "#wallet"; }) : toast(r.error || "ورود انجام نشد"); }
+  if (f.id == "su") {
+    if (d.password != d.again) return toast("دو رمز یکی نیستند");
+    const r = await api("/api/register", { username: d.username, password: d.password });
+    return r.ok ? boot().then(() => { location.hash = ADM ? "#admin" : "#wallet"; }) : toast(r.error || "ساخت حساب انجام نشد");
+  }
+  if (f.id == "buyaz") {
+    const n = Math.max(1, parseInt(d.n) || 1), c = n * CFG.rate;
+    if (S.toman < c) return toast("موجودی کیف پول کافی نیست");
+    S.toman -= c; S.az += n; S.log.unshift("خرید " + fmt(n) + " AZ Coin");
+  } else if (f.id == "tk") {
+    if (T.type != "staff" && !T.target) return toast("یک مورد را انتخاب کن");
+    S.tickets.unshift({ id: Date.now(), type: T.type, target: T.type == "staff" ? "تیم استف" : T.target, subject: d.subject, msg: d.msg, by: S.user.name, status: "باز" });
+    toast("تیکت ارسال شد"); tt = "mine";
+  } else if (f.id == "gg") {
+    const n = d.name.trim();
+    if (!n || S.gangs.includes(n)) return toast("این نام خالی یا قبلاً ثبت شده است");
+    S.gangs.push(n); toast("گنگ ثبت شد");
+  }
+  save(); render();
+});
+
+document.addEventListener("change", e => { if (e.target.name == "role") { S.role = e.target.value; save(); render(); } });
+// ---- فروشگاه ----
+const DEFAULT_SHOP = [
+  { id: "v1", name: "ماشین VIP — کلاسیک", cat: "وسایل نقلیه", price: 30, img: "" },
+  { id: "v2", name: "ماشین VIP — اسپرت", cat: "وسایل نقلیه", price: 45, img: "" },
+  { id: "v3", name: "ماشین VIP — سوپر", cat: "وسایل نقلیه", price: 80, img: "" },
+  { id: "g1", name: "گنگ VIP", cat: "گنگ", price: 50, img: "" }
+];
+let shop = [], fcat = "", ADM = false, ADMU = "", E = null;
+window.AZ_gangs = () => S.gangs;
+const go = id => document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+async function loadShop() {
+  try { const r = await fetch("/api/shop"); if (r.ok) { shop = (await r.json()).items; return; } } catch (e) {}
+  shop = S.shop && S.shop.length ? S.shop : DEFAULT_SHOP.slice();
+}
+async function checkAdmin() { try { const r = await fetch("/api/admin/me"); ADM = r.ok; ADMU = ADM ? (await r.json()).user : ""; } catch (e) { ADM = false; } }
+function renderShop() {
+  const cats = [...new Set(shop.map(i => i.cat))];
+  if (fcat && !cats.includes(fcat)) fcat = "";
+  put("sf", ["", ...cats].map(c => `<button type="button" aria-pressed="${fcat == c}" data-cat="${esc(c)}">${c ? esc(c) : "همه"}</button>`).join(""));
+  put("cats", shop.filter(i => !fcat || i.cat == fcat).map(i => `<div class="si">${i.img ? `<img src="${esc(i.img)}" alt="" loading="lazy">` : ""}<b>${esc(i.name)}</b><small class="sub">${esc(i.cat)}</small><span class="pr">${fmt(i.price)} AZ</span><button type="button" class="btn p" data-buy="${esc(i.id)}">خرید</button></div>`).join("") || `<p class="sub">هنوز آیتمی اضافه نشده.</p>`);
+}
+function adminHtml() {
+  const cats = [...new Set(shop.map(i => i.cat))];
+  return `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem"><h2>${E ? "ویرایش آیتم" : "افزودن آیتم"}</h2><button class="btn" data-act="out">خروج</button></div>
+  <form id="af" style="margin-top:1rem"><input type="hidden" name="id" value="${E ? esc(E.id) : ""}">
+  <label>نام<input name="name" required maxlength="60" value="${E ? esc(E.name) : ""}"></label>
+  <label>دسته (مثلاً وسایل نقلیه)<input name="cat" required list="catlist" maxlength="30" value="${E ? esc(E.cat) : ""}"></label><datalist id="catlist">${cats.map(c => `<option value="${esc(c)}">`).join("")}</datalist>
+  <label>قیمت (AZ Coin)<input name="price" type="number" min="0" max="100000" required value="${E ? E.price : ""}"></label>
+  <label>آدرس عکس (اختیاری، با http یا https)<input name="img" dir="ltr" value="${E ? esc(E.img || "") : ""}"></label>
+  <button class="btn p">${E ? "ذخیره تغییرات" : "افزودن"}</button>${E ? ` <button type="button" class="btn" data-adm="cancel">انصراف</button>` : ""}</form></div>
+  <h2>آیتم‌های فروشگاه</h2>${shop.map(i => `<div class="row"><div class="tx"><b>${esc(i.name)}</b><small>${esc(i.cat)} · ${fmt(i.price)} AZ</small></div><button class="btn" data-adm="edit" data-id="${esc(i.id)}">ویرایش</button><button class="btn" data-adm="del" data-id="${esc(i.id)}">حذف</button></div>`).join("")}`;
+}
+function renderAdmin() { const el = document.getElementById("admin"); if (el) el.hidden = !ADM; put("admin-body", ADM ? adminHtml() : ""); }
+
+document.addEventListener("click", async e => {
+  const c = e.target.closest("[data-cat]"), b = e.target.closest("[data-buy]"), j = e.target.closest("[data-join]"), a = e.target.closest("[data-adm]");
+  if (c) { fcat = c.dataset.cat; renderShop(); }
+  else if (j) {
+    if (!S.user) { toast("برای درخواست عضویت اول وارد شو"); return go("login"); }
+    T = { type: "gang", target: j.dataset.join }; tt = "new"; render(); go("tickets"); toast("گنگ " + j.dataset.join + " انتخاب شد؛ توضیحاتت را بنویس");
+  } else if (b) {
+    if (!S.user) { toast("برای خرید اول وارد شو"); return go("login"); }
+    const it = shop.find(i => i.id == b.dataset.buy); if (!it) return;
+    if (S.az < it.price) { toast("AZ Coin کافی نیست؛ از بخش کیف پول بخر"); return go("wallet"); }
+    S.az -= it.price; S.log.unshift("خرید " + it.name); toast("خرید انجام شد"); save(); render();
+  } else if (a) {
+    const k = a.dataset.adm, id = a.dataset.id;
+    if (k == "demo") { ADM = true; ADMU = "نمایشی"; S.user = { name: "ادمین نمایشی", admin: true }; }
+    else if (k == "out") { if (!NOSRV) await api("/api/admin/logout", {}); ADM = false; E = null; }
+    else if (k == "edit") E = shop.find(i => i.id == id) || null;
+    else if (k == "cancel") E = null;
+    else if (k == "del") {
+      if (!confirm("این آیتم حذف شود؟")) return;
+      if (NOSRV) { shop = shop.filter(i => i.id != id); S.shop = shop; }
+      else { const r = await api("/api/admin/shop", { op: "delete", id }); if (!r.ok) return toast(r.error || "حذف نشد"); shop = r.items; }
+    }
+    save(); render();
+    if (k == "demo") go("admin");
+  }
+});
+
+let NOSRV = false;
+async function boot() {
+  try {
+    const r = await fetch("/api/me");
+    if (r.ok) { const m = await r.json(); S.me = m; S.user = { name: m.name }; }
+    else { S.me = null; S.user = null; }
+  } catch (e) { NOSRV = true; S.me = null; }
+  await loadShop(); await checkAdmin();
+  if (ADM && !S.user) S.user = { name: "ادمین " + ADMU, admin: true };
+  if (location.hash == "#login-failed") { toast("ورود با استیم انجام نشد"); history.replaceState(0, "", location.pathname); }
+  save(); render();
+}
+boot();
+
+})();
+</script>
+</body>
+</html>
